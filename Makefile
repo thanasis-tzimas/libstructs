@@ -1,5 +1,5 @@
-CC 	= gcc -O
-CFLAGS 	= -Wall -Wextra
+CC 	= gcc -O -std=c90
+CFLAGS 	= -Wall -Wextra -pedantic-errors
 srcdir	= .
 SRCS_C 	= $(wildcard $(srcdir)/*.c)
 OBJS	= $(SRCS_C:.c=.o)
