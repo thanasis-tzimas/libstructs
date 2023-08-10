@@ -1,7 +1,7 @@
 CC 	= gcc -O -std=c90
 CFLAGS 	= -Wall -Wextra -pedantic-errors \
 	  -fpic
-srcdir	= .
+srcdir	= ./src
 SRCS_C 	= $(wildcard $(srcdir)/*.c)
 OBJS	= $(SRCS_C:.c=.o)
 TARGET	= libstructs
@@ -15,4 +15,4 @@ all: $(OBJS)
 
 .PHONY: clean
 clean:
-	$(RM) *.o *.so
+	$(RM) $(srcdir)/*.o *.so
