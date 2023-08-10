@@ -36,5 +36,5 @@ void list_del(struct list_entry *entry)
 
 int list_is_empty(struct list_entry *head)
 {
-	return !head->next == head;
+	return !(head->next == head);
 }
