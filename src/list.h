@@ -78,5 +78,5 @@ extern int list_is_empty(struct list_entry *head);
  */
 #define list_get(ptr, T, member) ({ \
 	void *_vptr = (void*)(ptr); \
-	((T*)(_vptr - __offset_of(T, member))); })
+	((T*)(_vptr - offsetof(T, member))); })
 #endif
