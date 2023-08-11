@@ -2,7 +2,7 @@
 
 unsigned hashtable_hash(unsigned long val, unsigned bits)
 {
-	return val * GOLDEN_RATION >> (64 - bits);
+	return val * GOLDEN_RATIO >> (64 - bits);
 }
 
 void hashtable_init(struct bucket *ht, unsigned size)

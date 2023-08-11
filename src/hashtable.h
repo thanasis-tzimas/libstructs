@@ -28,7 +28,7 @@ struct bucket {
 
 #define HASHTABLE_BITS(name) (int)log2(HASHTABLE_SIZE(name))
 
-#define GOLDEN_RATION 0x61c8864680b583eull
+#define GOLDEN_RATIO 0x61c88647
 
 #define bucket_is_empty(bucket) \
 	!(bucket->first)
