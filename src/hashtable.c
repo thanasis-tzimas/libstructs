@@ -18,12 +18,12 @@ void hashtable_add(struct bucket_entry *entry,
 	struct bucket *ht,
 	unsigned long key)
 {
-	struct bucket_entry *first = (&ht[hashtable_hash(key, HASH_BITS(ht))])->first;
+	struct bucket_entry *first = (&ht[hashtable_hash(key, HASHTABLE_BITS(ht))])->first;
 	entry->next = first;
 	if (first)
 		first->pprev = &entry->next;
-	(&ht[hashtable_hash(key, HASH_BITS(ht))])->first = entry;
-	entry->pprev = &(&ht[hashtable_hash(key, HASH_BITS(ht))]);
+	(&ht[hashtable_hash(key, HASHTABLE_BITS(ht))])->first = entry;
+	entry->pprev = &(&ht[hashtable_hash(key, HASHTABLE_BITS(ht))]);
 }
 
 void hashtable_del(struct bucket_entry *entry)
