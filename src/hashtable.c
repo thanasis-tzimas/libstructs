@@ -29,7 +29,7 @@ void hashtable_add(struct bucket_entry *entry,
 void hashtable_del(struct bucket_entry *entry)
 {
 	entry->next = NULL;
-	entry0->prev = NULL;
+	entry->pprev = NULL;
 }
 
 int hashtable_is_empty(struct bucket *ht, unsigned size)
