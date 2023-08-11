@@ -1,7 +1,7 @@
 #ifndef LIBSTRUCTS_hashtable_h
 #define LIBSTRUCTS_hashtable_h
 
-#include <math.h>
+#include "log2.h"
 #include <stddef.h>
 
 struct bucket_entry {
@@ -21,12 +21,11 @@ struct bucket {
 	DECLARE_HASHTABLE(name, bits) = \
 		{ [0 ... ((1 << (bits)) - 1] = BUCKET_INIT }
 
-#define ARRAY_SIZE(name) \
-	(sizeof(name)/sizeof(name[0]))
+#define ARRAY_SIZE(name) sizeof(name) / sizeof((name)[0])
 
 #define HASHTABLE_SIZE(name) (ARRAY_SIZE(name))
 
-#define HASHTABLE_BITS(name) (int)log2(HASHTABLE_SIZE(name))
+#define HASHTABLE_BITS(name) ilog2(HASHTABLE_SIZE(name))
 
 #define GOLDEN_RATIO 0x61c88647
 
