@@ -29,8 +29,12 @@ struct bucket {
 
 #define GOLDEN_RATIO 0x61c88647
 
-#define bucket_is_empty(bucket) \
-	!(bucket->first)
+/*
+ * bucket_is_empty - test if bucket has no entries
+ * @bucket: the bucket to test
+ */
+extern int bucket_is_empty(struct bucket *bucket);
+
 /*
  * hashtable_hash - a fast hash function for ints 
  *  by Nadia Yvette Chambers, IBM

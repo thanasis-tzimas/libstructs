@@ -1,5 +1,10 @@
 #include "hashtable.h"
 
+int bucket_is_empty(struct bucket *bucket)
+{
+	return !(bucket->first);
+}
+
 unsigned hashtable_hash(unsigned long val, unsigned bits)
 {
 	return val * GOLDEN_RATIO >> (64 - bits);
