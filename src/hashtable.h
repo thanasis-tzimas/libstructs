@@ -1,16 +1,10 @@
 #ifndef LIBSTRUCTS_hashtable_h
 #define LIBSTRUCTS_hashtable_h
 
+#include "bucket.h"
 #include "log2.h"
 #include <stddef.h>
 
-struct bucket_entry {
-	struct bucket_entry *next, **pprev;
-};
-
-struct bucket {
-	struct bucket_entry *first;
-};
 
 #define BUCKET_INIT { .first = NULL }
 

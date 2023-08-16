@@ -1,10 +1,5 @@
 #include "hashtable.h"
 
-int bucket_is_empty(struct bucket *bucket)
-{
-	return !(bucket->first);
-}
-
 unsigned hashtable_hash(unsigned long val, unsigned bits)
 {
 	return val * GOLDEN_RATIO >> (64 - bits);
@@ -28,7 +23,7 @@ void hashtable_add(struct bucket_entry *entry,
 	if (first)
 		first->pprev = &entry->next;
 	(&ht[hashtable_hash(key, HASHTABLE_BITS(ht))])->first = entry;
-	entry->pprev = &(&ht[hashtable_hash(key, HASHTABLE_BITS(ht))]);
+	entry->pprev = &(&ht[hashtable_hash(key, HASHTABLE_BITS(ht))])->first;
 }
 
 void hashtable_del(struct bucket_entry *entry)
