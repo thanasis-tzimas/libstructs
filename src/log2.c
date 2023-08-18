@@ -2,11 +2,9 @@
 
 int ilog2(unsigned long x)
 {
-	int i, y;
-
-	y = 0;
-	for (i = 32; i > 0; i >>= 1)
-		if ((1ul << (y + i)) <= x)
-			y += i;
-	return y + 1;
+	int bitpos = -1;
+	asm("bsrq %1,%q0"
+		: "+r" (bitpos)
+		: "rm" (x));
+	return bitpos + 1;
 }
