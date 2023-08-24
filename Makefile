@@ -1,6 +1,7 @@
 CC 	= gcc -O -std=c99
 CFLAGS 	= -Wall -Wextra -pedantic-errors \
 	  -fpic
+CLIBS	= -lm
 srcdir	= ./src
 SRCS_C 	= $(wildcard $(srcdir)/*.c)
 OBJS	= $(SRCS_C:.c=.o)
@@ -8,10 +9,10 @@ TARGET	= libstructs
 
 .PHONY: all
 all: $(OBJS)
-	$(CC) $(CFLAGS) -shared -o $(TARGET).so $(OBJS)
+	$(CC) $(CFLAGS) $(CLIBS) -shared -o $(TARGET).so $(OBJS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(CLIBS) -c -o $@ $^
 
 .PHONY: clean
 clean:

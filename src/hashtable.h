@@ -2,7 +2,7 @@
 #define LIBSTRUCTS_hashtable_h
 
 #include "bucket.h"
-#include "log2.h"
+#include <math.h>
 #include <stddef.h>
 
 
@@ -19,15 +19,9 @@
 
 #define HASHTABLE_SIZE(name) (ARRAY_SIZE(name))
 
-#define HASHTABLE_BITS(name) ilog2(HASHTABLE_SIZE(name))
+#define HASHTABLE_BITS(name) ilogb(HASHTABLE_SIZE(name))
 
 #define GOLDEN_RATIO 0x61c88647
-
-/*
- * bucket_is_empty - test if bucket has no entries
- * @bucket: the bucket to test
- */
-extern int bucket_is_empty(struct bucket *bucket);
 
 /*
  * hashtable_hash - a fast hash function for ints 
