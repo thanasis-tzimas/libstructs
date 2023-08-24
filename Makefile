@@ -1,4 +1,4 @@
-CC 	= gcc -O -std=gnu90
+CC 	= gcc -O -std=c99
 CFLAGS 	= -Wall -Wextra -pedantic-errors \
 	  -fpic
 srcdir	= ./src

@@ -4,7 +4,7 @@
 
 ## Building from source
 **Prerequisites** for building the shareable library:
-- `gcc`: libstructs is written in GNU C90 and it should be compilable by most C compilers.
+- `gcc`: libstructs is written in C99 and it should be compilable by most C compilers.
 - `glibc`: as of now, some data structures depend upon `glibc`, primarly for memory allocations.
 - `make`: it is recommended to use GNU Make for automating the building process.
 
