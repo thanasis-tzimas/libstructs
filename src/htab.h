@@ -1,18 +1,11 @@
 #ifndef LIBSTRUCTS_hashtable_h
 #define LIBSTRUCTS_hashtable_h
 
+#include "types.h"
 #include <math.h>
 #include <stddef.h>
 
 #define BUCKET_INIT { .first = NULL }
-
-struct bucket {
-	struct bucket_entry *first;
-};
-
-struct bucket_entry {
-	struct bucket_entry *next, **pprev;
-};
 
 /*
  * bucket_add - add an entry into a bucket

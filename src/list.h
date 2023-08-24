@@ -4,11 +4,8 @@
 #ifndef LIBSTRUCTS_list_h
 #define LIBSTRUCTS_list_h
 
+#include "types.h"
 #include <stddef.h>
-
-struct list_entry {
-	struct list_entry *next, *prev;
-};
 
 #define LIST_HEAD_INIT(name) { &(name), &(name) }
 
@@ -63,11 +60,6 @@ extern void list_del(struct list_entry *entry);
  */
 extern int list_is_empty(struct list_entry *head);
 
-#ifdef offsetof
-#undef offsetof
-	#define offsetof(T, member) \
-		((size_t)&(((T*)0)->member))
-#endif
 /*
  * list_get - get the list's container as a pointer
  * @ptr:
@@ -76,7 +68,6 @@ extern int list_is_empty(struct list_entry *head);
  *
  * Note: this is not a type safe operation.
  */
-#define list_get(ptr, T, member) ({ \
-	void *_vptr = (void*)(ptr); \
-	((T*)(_vptr - offsetof(T, member))); })
+#define list_get(ptr, T, member) \
+	container_of(ptr, T, member)
 #endif
