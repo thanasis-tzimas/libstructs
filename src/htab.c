@@ -1,4 +1,4 @@
-#include "hashtable.h"
+#include "htab.h"
 
 void bucket_add(struct bucket_entry *new,
 		struct bucket *bucket)
@@ -47,12 +47,12 @@ int bucket_is_empty(struct bucket *bucket)
 	return !(bucket->first);
 }
 
-unsigned hashtable_hash(unsigned long val, unsigned bits)
+unsigned htab_hash(unsigned long val, unsigned bits)
 {
 	return val * GOLDEN_RATIO >> (64 - bits);
 }
 
-void hashtable_init(struct bucket *ht, unsigned size)
+void htab_init(struct bucket *ht, unsigned size)
 {
 	unsigned i;
 
@@ -61,25 +61,19 @@ void hashtable_init(struct bucket *ht, unsigned size)
 
 }
 
-void hashtable_add(struct bucket_entry *entry,
+void htab_add(struct bucket_entry *entry,
 	struct bucket *ht,
 	unsigned long key)
 {
-	struct bucket_entry *first = (&ht[hashtable_hash(key, HASHTABLE_BITS(ht))])->first;
-	entry->next = first;
-	if (first)
-		first->pprev = &entry->next;
-	(&ht[hashtable_hash(key, HASHTABLE_BITS(ht))])->first = entry;
-	entry->pprev = &(&ht[hashtable_hash(key, HASHTABLE_BITS(ht))])->first;
+	bucket_add(entry, &ht[htab_hash(key, HTAB_BITS(ht))]);
 }
 
-void hashtable_del(struct bucket_entry *entry)
+void htab_del(struct bucket_entry *entry)
 {
-	entry->next = NULL;
-	entry->pprev = NULL;
+	bucket_del(entry);
 }
 
-int hashtable_is_empty(struct bucket *ht, unsigned size)
+int htab_is_empty(struct bucket *ht, unsigned size)
 {
 	unsigned i;
 

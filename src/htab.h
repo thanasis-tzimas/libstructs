@@ -1,5 +1,5 @@
-#ifndef LIBSTRUCTS_hashtable_h
-#define LIBSTRUCTS_hashtable_h
+#ifndef LIBSTRUCTS_htab_h
+#define LIBSTRUCTS_htab_h
 
 #include "types.h"
 #include <math.h>
@@ -43,57 +43,57 @@ extern void bucket_del(struct bucket_entry *entry);
  */
 extern int bucket_is_empty(struct bucket *bucket);
 
-#define DECLARE_HASHTABLE(name, bits) \
+#define DECLARE_HTAB(name, bits) \
 	struct bucket name[1 << (bits)]
 
-#define DEFINE_HASHTABLE(name, bits) \
-	DECLARE_HASHTABLE(name, bits) = \
+#define DEFINE_HTAB(name, bits) \
+	DECLARE_HTAB(name, bits) = \
 		{ [0 ... ((1 << (bits)) - 1] = BUCKET_INIT }
 
-#define ARRAY_SIZE(name) sizeof(name) / sizeof((name)[0])
+#define ARRAY_SIZE(name) (sizeof(name) / sizeof((name)[0]))
 
-#define HASHTABLE_SIZE(name) (ARRAY_SIZE(name))
+#define HTAB_SIZE(name) (ARRAY_SIZE(name))
 
-#define HASHTABLE_BITS(name) ilogb(HASHTABLE_SIZE(name))
+#define HTAB_BITS(name) ilogb(HTAB_SIZE(name))
 
 #define GOLDEN_RATIO 0x61c88647
 
 /*
- * hashtable_hash - a fast hash function for ints 
+ * htab_hash - a fast hash function for ints 
  *  by Nadia Yvette Chambers, IBM
  * @val: the value to be hashed
  * @bits: the nth most significant bits to be used on the calculation
  */
-extern unsigned hashtable_hash(unsigned long val, unsigned bits);
+extern unsigned htab_hash(unsigned long val, unsigned bits);
 
 /*
- * hashtable_init - initialize a hashtable
+ * htab_init - initialize a hashtable
  * @ht: the hashstable to be initialized
  * @size: the hashtable's size
  */
-extern void hashtable_init(struct bucket *ht, unsigned size);
+extern void htab_init(struct bucket *ht, unsigned size);
 
 /*
- * hashtable_add - add a bucket entry into a bucket in the hashtable
+ * htab_add - add a bucket entry into a bucket in the hashtable
  * @entry: the entry to be added
  * @ht: the hashtable that the new entry will be added to
  * @key: the key that will be hashed and added as an entry in the hashtable
  */
-extern void hashtable_add(struct bucket_entry *entry,
+extern void htab_add(struct bucket_entry *entry,
 	struct bucket *ht,
 	unsigned long key);
 
 /*
- * hashtable_del - delete an entry from the hashtable
+ * htab_del - delete an entry from the hashtable
  * @entry: the bucket entry to be deleted
  */
-extern void hashtable_del(struct bucket_entry *entry);
+extern void htab_del(struct bucket_entry *entry);
 
 /*
- * hashtable_is_empty - test if hashtable is empty
+ * htab_is_empty - test if hashtable is empty
  * @ht: the hashtable to be tested if empty
  * @size: the hashtable's size
  */
-extern int hashtable_is_empty(struct bucket *ht, unsigned size);
+extern int htab_is_empty(struct bucket *ht, unsigned size);
 
 #endif
