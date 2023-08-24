@@ -15,15 +15,8 @@ struct bucket_entry {
 
 struct graph_node {
 	struct graph_node **links;
-};
-
-struct tree_root {
-};
-
-struct tree_node {
-};
-
-struct tree_internal {
+	unsigned int sp;
+	unsigned int size;
 };
 
 #endif
